@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/style/register.css">
+</head>
+<body>
+    <div class="container">
+        <form action="/submit_form" method="post" onsubmit="return validate();">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" required><br>
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" required><br>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required><br>
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" id="cpassword" name="cpassword" required><br>
+            <input type="submit" value="SignUp">
+
+        </form>
+        <p>Already have account <a href="/">login</a></p>
+    </div>
+    
+
+    <script>
+        function validate() {
+            let p = document.getElementById('password').value;
+            let cp = document.getElementById('cpassword').value;
+
+            if (p !== cp) {
+                alert("Password and Confirm password do not match");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission if validation passes
+        }
+    </script>
+</body>
+</html>

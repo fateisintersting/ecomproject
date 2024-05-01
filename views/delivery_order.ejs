@@ -1,0 +1,92 @@
+<!-- delivery_order.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Order Details</title>
+    <style>
+           
+        /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.delivery-details {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+        input[type="checkbox"] {
+            display: none; /* Hide the default checkbox */
+        }
+        
+        input[type="checkbox"] + label {
+            display: block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type="checkbox"]:checked + label {
+            background-color: #e6f7ff; /* Change background color when checked */
+        }
+    </style>
+</head>
+<body>
+    <div class="delivery-details">
+        <h2>Delivery Order Details</h2>
+        <% if (deliveryDetails.length > 0) { %>
+            <form action="/complete-delivery" method="POST">
+                <ul>
+                    <% deliveryDetails.forEach(order => { %>
+                        <li>
+                            <input type="checkbox" id="<%= order.billing_id %>" name="delivery" value="<%= order.billing_id %>">
+                            <label for="<%= order.billing_id %>">
+                                <h3>Order ID: <%= order.billing_id %></h3>
+                                <p>Name: <%= order.first_name %> <%= order.last_name %></p>
+                                <p>Email: <%= order.bill_email %></p>
+                                <p>Mobile: <%= order.mobile %></p>
+                                <p>City: <%= order.city %></p>
+                                <p>Address: <%= order.address %></p>
+                                <p>Payment Method: <%= order.payment_method %></p>
+                                <p>Ordered At: <%= order.created_at %></p>
+                            </label>
+                        </li>
+                    <% }); %>
+                </ul>
+                <input type="submit" value="Complete Delivery">
+            </form>
+        <% } else { %>
+            <p>No delivery orders found.</p>
+        <% } %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Delevery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/style/admin_delivey.css">
+    <link rel="stylesheet" href="/style/admin.css">
+</head>
+<body>
+    <nav>
+    <ul>
+        <li><a href="/admin">Admin Panel</a></li>
+        <li><a href="/delivery">Delivery</a></li>
+    </ul>
+</nav>
+    <h1>Admin Panel</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Pincode</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(order => { %>
+                <tr>
+                    <td><%= order.order_id %></td>
+                    <td><%= order.first_name %></td>
+                    <td><%= order.last_name %></td>
+                    <td><%= order.address %></td>
+                    <td><%= order.mobile %></td>
+                    <td><%= order.email %></td>
+                    <td><%= order.pincode %></td>
+                    <td><%= order.status %></td>
+                    <td>
+                        <% if (order.status !== 'Delivered') { %>
+                            <form action="/mark_delivered" method="POST">
+                                <input type="hidden" name="orderId" value="<%= order.order_id %>">
+                                <button type="submit" class="deliver-btn">Mark Delivered</button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

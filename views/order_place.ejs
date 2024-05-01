@@ -1,0 +1,84 @@
+<!-- order_place.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <!-- Include your CSS stylesheet -->
+    <style>
+        /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.order-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="order-details">
+        <% if (orders.length > 0) { %>
+            <h2>Your Orders</h2>
+            <ul>
+                <% orders.forEach(order => { %>
+                    <li>Product: <%= order.product_name %> - Quantity: <%= order.quantity %></li>
+                    <!-- Add more details as needed -->
+                <% }); %>
+            </ul>
+            <button id="cancel-order">Cancel Order</button>
+        <% } else { %>
+            <p>You have no orders.</p>
+        <% } %>
+    </div>
+
+    <script>
+        // JavaScript for handling cancellation
+        document.getElementById('cancel-order').addEventListener('click', function() {
+            var confirmCancel = confirm('Are you sure you want to cancel your order?');
+            if (confirmCancel) {
+                window.location.href = '/cancel-order';
+            }
+        });
+    </script>
+</body>
+</html>
